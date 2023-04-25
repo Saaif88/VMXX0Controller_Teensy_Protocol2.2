@@ -141,7 +141,6 @@ void Correct_Position()
   word         abs_Position_Difference;     // Contains the difference without negative numbers
   short        Current_Offset;              // Contains the current offset of the Dynamixel
   short        New_Offset;                  // Contains the new offset to be sent to the Dynamixel
-  bool         Negative;                    // A true or false that stores whether the difference is negative or not
   byte         Pos_Corrected_Count = 0;     // the stored number of positive corrections the system has made
   byte         Neg_Corrected_Count = 0;     // the stored number of negative corrections the system has made
 
@@ -183,7 +182,6 @@ void Correct_Position()
 
   else if (Ping1 == true && Position_Difference < 0) // If the Dynamixel is connected and the position difference is a negative number:
   {
-       Negative = true; // Set the negative check to be true
        // PC_SERIAL.println(); // Just a blank line for readability
        // PC_SERIAL.println(F("Negative Number detected"));
 
@@ -214,7 +212,6 @@ void Correct_Position()
 
   else if (Ping1 == true && Position_Difference > 0) // If the Dynamixel is connected and the position difference is a positive number:
   {
-       Negative = false; // Set the negative check to be false
        // PC_SERIAL.println(); // Just a blank line for readability
        // PC_SERIAL.println(F("Positive Number detected"));
 

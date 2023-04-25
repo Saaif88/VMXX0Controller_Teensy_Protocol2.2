@@ -13,8 +13,9 @@ using namespace ControlTableItem; //This namespace is required to use Control ta
 // ********************************************************************************************************************************************************************************************
 
 uint8_t DXL_ID = 1;                   // The ID of the Dynamixel
-extern bool Fault = 0;                // A conditional fault variable, used to store the status of a fault condition
-extern byte Error = 0;                // Contains the Error Bits. There are 8 possible error bits, so 1 byte is enough to store it.
+extern bool Fault;                    // A conditional fault variable, used to store the status of a fault condition
+long Requested_Position;              // The requested position of the Dynaixel, to be sent to the Goal Position
+//extern byte Error;                // Contains the Error Bits. There are 8 possible error bits, so 1 byte is enough to store it.
 
 // ********************************************************************************************************************************************************************************************
 // Pin Assignments

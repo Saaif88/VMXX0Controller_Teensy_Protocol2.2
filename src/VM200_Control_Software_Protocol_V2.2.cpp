@@ -27,7 +27,8 @@
 
 #include "setup.h" // I use this to declare global variables, include libraries, define pins, 
 #include "Serial_Functions.h" // All of the functions dealing with communications between the MCU, PC and Dynamixel
-#include "EEPROM_Functions.h" // All of the functions that relate to the memory chip
+//#include "EEPROM_Functions.h" // All of the functions that relate to the memory chip
+// None of these functions are actually required for this version of the code.
 
 // ********************************************************************************************************************************************************************************************
 // Variables
@@ -71,12 +72,11 @@ void setup() {
 
   dxl.torqueOff(DXL_ID); // Turn the Torque Off. Prerequisite for changing EEPROM data.
 
-  // Set Dynamixel Mode
+  // Check current Dynamixel operating mode and change if necessary
   // Mode 3 = OP_POSITION = Position Control Mode (One full rotation = -263,187 to 263,187) (Actually -262,931 to 262,931) for DXL Pro or 0-4096 for DXL MX
   // Mode 4 = OP_EXTENDED_POSITION = Extended Position Control Mode (Multi Turn Mode from -2,147,483,648 to 2,147,483,647 (DXL Pro) or -1,048,575 to 1,048,575 (DXL MX))
   while (dxl.readControlTableItem(OPERATING_MODE, DXL_ID) != 3)
   {
-    //dxl.setOperatingMode(DXL_ID, OP_POSITION);
     dxl.setOperatingMode(DXL_ID, OP_POSITION);
     PC_SERIAL.print(F("Operating Mode setting verified OK"));
   };
@@ -140,7 +140,7 @@ void loop() {
   if (currentMillis - previousMillis >= interval) // This will check to see what the current time of the program is. If a certain time has passed, reset the timer, and run the Save_Position function
   {
     previousMillis = currentMillis; // Reset the loop timer
-    Save_Position(); // Runs the save position function. This constantly compares the turn saved in the MRAM to the actual turn that the Dynamixels are on.
+    //Save_Position(); // Runs the save position function. This constantly compares the turn saved in the MRAM to the actual turn that the Dynamixels are on.
   }
 
   PC_numBytes = PC_SERIAL.available(); // Check to see how many bytes are waiting at the serial port.
